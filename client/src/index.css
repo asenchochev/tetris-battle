@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-blue: #00f5ff;
+  --neon-purple: #bf00ff;
+  --neon-green: #00ff88;
+  --neon-pink: #ff3366;
+  --neon-orange: #ff8800;
+  --neon-yellow: #ffd700;
+  --dark-950: #02020f;
+  --dark-900: #050510;
+  --dark-850: #080820;
+  --dark-800: #0d0d25;
+  --dark-700: #12123a;
+  --glass-bg: rgba(0, 245, 255, 0.03);
+  --glass-border: rgba(0, 245, 255, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--dark-950);
+  color: #e0e0ff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--dark-900); }
+::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 2px; }
+
+/* Glass morphism */
+.glass {
+  background: rgba(5, 5, 16, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-dark {
+  background: rgba(2, 2, 15, 0.85);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(0, 245, 255, 0.08);
+}
+
+/* Neon text effects */
+.neon-text-blue {
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+}
+
+.neon-text-purple {
+  color: var(--neon-purple);
+  text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+}
+
+.neon-text-green {
+  color: var(--neon-green);
+  text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+}
+
+/* Glow borders */
+.border-glow-blue { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 245, 255, 0.3), inset 0 0 15px rgba(0, 245, 255, 0.05); }
+.border-glow-purple { border-color: var(--neon-purple); box-shadow: 0 0 15px rgba(191, 0, 255, 0.3); }
+.border-glow-green { border-color: var(--neon-green); box-shadow: 0 0 15px rgba(0, 255, 136, 0.3); }
+.border-glow-pink { border-color: var(--neon-pink); box-shadow: 0 0 15px rgba(255, 51, 102, 0.3); }
+
+/* Animated grid background */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+/* Scanline effect */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* Tetris cell */
+.tetris-cell {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.tetris-cell::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply relative px-6 py-3 font-display font-bold text-sm uppercase tracking-widest;
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(191, 0, 255, 0.1));
+  border: 1px solid var(--neon-blue);
+  color: var(--neon-blue);
+  transition: all 0.2s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-danger {
+  @apply relative px-6 py-3 font-display font-bold text-sm uppercase tracking-widest;
+  background: linear-gradient(135deg, rgba(255, 51, 102, 0.1), rgba(255, 0, 60, 0.05));
+  border: 1px solid var(--neon-pink);
+  color: var(--neon-pink);
+  transition: all 0.2s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.btn-danger:hover {
+  background: rgba(255, 51, 102, 0.2);
+  box-shadow: 0 0 20px rgba(255, 51, 102, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Rank badge colors */
+.rank-Bronze { color: #cd7f32; border-color: #cd7f32; }
+.rank-Silver { color: #c0c0c0; border-color: #c0c0c0; }
+.rank-Gold { color: #ffd700; border-color: #ffd700; }
+.rank-Diamond { color: #b9f2ff; border-color: #b9f2ff; }
+.rank-Master { color: #ff00ff; border-color: #ff00ff; }
+
+/* Garbage animation */
+@keyframes garageShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.garbage-shake { animation: garageShake 0.3s ease; }
+
+/* Line clear flash */
+@keyframes lineClearFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; background: white; }
+}
+
+.line-clear-flash { animation: lineClearFlash 0.15s ease 3; }
+
+/* Particle burst */
+@keyframes particleBurst {
+  0% { transform: scale(0) translate(0, 0); opacity: 1; }
+  100% { transform: scale(1) translate(var(--tx), var(--ty)); opacity: 0; }
+}
+
+/* Pulse ring */
+@keyframes pulseRing {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid currentColor;
+  animation: pulseRing 1.5s ease-out infinite;
+}
